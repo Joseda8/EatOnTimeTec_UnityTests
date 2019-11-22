@@ -48,7 +48,7 @@ public class DishTest {
     
     @Test
     @Ignore
-    public void postDish() {
+    public void addDish() {
         io.restassured.response.Response res = given()
         .contentType("application/json")
         .body("{\"name\":\"Pinto\", \"points\": 14, \"ingredients\":\"Arroz, frijoles\", "

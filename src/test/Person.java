@@ -14,7 +14,7 @@ import io.restassured.RestAssured;
 
 public class Person {
 
-	private String user_id = "30511";
+	private String user_id = "116920112";
 	
     @BeforeClass
     public static void init() {
@@ -67,5 +67,23 @@ public class Person {
         System.out.println(preferences);
     	JSONArray jsonArr = new JSONArray(preferences);		
     	assertFalse(jsonArr.length()==0);
+    }
+    
+    @Test
+    @Ignore
+    public void get_provinces() throws JSONException {  
+        String provinces = get("/EatOnTimeTECAPI/person/provinces").asString();
+    	
+        System.out.println(provinces);
+    	JSONArray jsonArr = new JSONArray(provinces);		
+    	assertFalse(jsonArr.length()==0);
+    }
+    
+    @Test
+    public void get_user_info() throws JSONException {  
+        String info = get("/EatOnTimeTECAPI/person/details/"
+        		+ user_id).asString();
+    	
+        System.out.println(info);
     }
 }

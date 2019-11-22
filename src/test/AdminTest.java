@@ -21,6 +21,7 @@ public class AdminTest {
     }
     
     @Test
+    @Ignore
     public void get_roles() throws JSONException {  
         String roles = get("/EatOnTimeTECAPI/admin/roles").asString();
     	
@@ -43,5 +44,19 @@ public class AdminTest {
         String body = res.getBody().asString();
         System.out.println(body);
         assertTrue(body.equals("Roles asignados exitosamente"));
+    }
+    
+    @Test
+    @Ignore
+    public void add_preferences() {
+        io.restassured.response.Response res = given()
+        .contentType("application/json")
+        .body("[\"Desayunos\", \"Postres\"]")
+        .when()
+        .post("/EatOnTimeTECAPI/admin/add/preferences");
+            
+        String body = res.getBody().asString();
+        System.out.println(body);
+        assertTrue(body.equals("Preferencias agregadas exitosamente"));
     }
 }

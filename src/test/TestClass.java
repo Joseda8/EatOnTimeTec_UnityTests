@@ -3,6 +3,7 @@ package test;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import io.restassured.RestAssured;
  
@@ -21,6 +22,7 @@ public class TestClass {
     }
 
     @Test
+    @Ignore
     public void testString() {
     	String json = get("/EatOnTimeTECAPI/hello/w").asString();
     	System.out.println(json);

@@ -14,7 +14,8 @@ public class FriendTest {
 	String name = "Daniel";
 	String phone = "65458741";
 	String user_id = "116920112";
-	
+	String friend_id = "515111215";
+
     @BeforeClass
     public static void init() {
         RestAssured.baseURI = "http://localhost";
@@ -66,6 +67,7 @@ public class FriendTest {
     }
     
     @Test
+    @Ignore
     public void get_user_friends() throws JSONException {  
         String friends = get("/EatOnTimeTECAPI/friend/get/"
         		+ user_id).asString();
@@ -73,5 +75,22 @@ public class FriendTest {
         System.out.println(friends);
     	JSONArray jsonArr = new JSONArray(friends);		
     	assertFalse(jsonArr.length()==0);
+    }
+    
+    @Test
+    public void delete_friend() {    	
+        io.restassured.response.Response res = given()
+        .contentType("application/json")
+        .body("{\"idUser\": "
+        		+ user_id
+        		+ ", \"idFriend\": "
+        		+ friend_id
+        		+ "}")
+        .when()
+        .post("/EatOnTimeTECAPI/friend/delete");
+        
+        String body = res.getBody().asString();
+        System.out.println(body);
+        assertTrue(body.equals("Amigo eliminado"));
     }
 }
