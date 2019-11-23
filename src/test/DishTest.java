@@ -10,7 +10,7 @@ import io.restassured.RestAssured;
 public class DishTest {
 	
 	private String name_dish = "pinto";
-	private int id_dish = 11;
+	private int id_dish = 21;
 	
     @BeforeClass
     public static void init() {
@@ -19,6 +19,7 @@ public class DishTest {
     }
     
     @Test
+    @Ignore
     public void getIdDish() {  
     	int result;
         io.restassured.response.Response res = given()
@@ -38,12 +39,16 @@ public class DishTest {
     @Ignore
     public void update_dish() {
     	String id = Integer.toString(id_dish);
-    	given().contentType("application/json")
-        .body("{\"name\":\"Pinto\", \"points\": 14, \"ingredients\":\"Arroz, frijoles\", "
+    	io.restassured.response.Response res = given().contentType("application/json")
+        .body("{\"name\":\"Huevo\", \"points\": 14, \"ingredients\":\"Huevo\", "
         		+ "\"calories\":120, \"price\":1000, \"preference\": 1}")
         .when()
         .put("/EatOnTimeTECAPI/dish/update/"
         		+ id);
+    	
+    	String body = res.getBody().asString();
+    	System.out.println(body);
+    	assertTrue(body.equals("Platillo actualizado exitosamente"));
     }
     
     @Test

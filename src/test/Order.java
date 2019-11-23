@@ -17,7 +17,6 @@ public class Order {
     }
     
     @Test
-    @Ignore
     public void create_order() throws JSONException {
         given()
         .contentType("application/json")
@@ -28,6 +27,7 @@ public class Order {
     }
     
     @Test
+    @Ignore
     public void rate_order() {
         io.restassured.response.Response res = given()
         .contentType("application/json")

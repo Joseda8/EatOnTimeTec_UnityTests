@@ -37,6 +37,20 @@ public class Person {
     }
     
     @Test
+    public void update_user() {
+    	io.restassured.response.Response res = given().contentType("application/json")
+        .body("{\"name\":\"Jose\", \"phone\":\"88888888\", "
+        		+ "\"province\": {\"idProvince\":3, \"provinceName\":\"Cartago\"}, \"email\":\"jd_montoya_s8@gmail.com\"}")
+        .when()
+        .put("/EatOnTimeTECAPI/person/update/"
+        		+ user_id);
+    	
+    	String body = res.getBody().asString();
+    	System.out.println(body);
+    	assertTrue(body.equals("Usuario actualizado exitosamente"));
+    }
+    
+    @Test
     @Ignore
     public void assign_user_preferences() {
         io.restassured.response.Response res = given()
@@ -80,6 +94,7 @@ public class Person {
     }
     
     @Test
+    @Ignore
     public void get_user_info() throws JSONException {  
         String info = get("/EatOnTimeTECAPI/person/details/"
         		+ user_id).asString();
